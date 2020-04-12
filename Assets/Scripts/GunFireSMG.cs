@@ -41,6 +41,7 @@ public class GunFireSMG : MonoBehaviour
         TheSMG.GetComponent<Animator>( ).enabled = true;
 
         MuzzleOff( );
+        MuzzleFlash.SetActive(false);
         TheSMG.GetComponent<Animator>( ).enabled = false;
         UpCurs.GetComponent<Animator>( ).enabled = false;
         DownCurs.GetComponent<Animator>( ).enabled = false;
@@ -50,7 +51,6 @@ public class GunFireSMG : MonoBehaviour
     }
     IEnumerator MuzzleOff( )
     {
-        yield return new WaitForSeconds(5);
-        MuzzleFlash.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
     }
 }
