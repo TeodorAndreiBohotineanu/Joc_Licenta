@@ -7,7 +7,8 @@ public class PistolDamage : MonoBehaviour
     public int DamageAmount = 3;
     public float TargetDistance;
     public float AllowedRange = 15.0f;
-
+    public RaycastHit hit;
+    public GameObject TheBullet;
     void Start( )
     {
         
@@ -24,7 +25,11 @@ public class PistolDamage : MonoBehaviour
                 TargetDistance = Shot.distance; /// Retinem distanta.
                 if (TargetDistance < AllowedRange)
                 {
-                    Shot.transform.SendMessage("DeductPoints", DamageAmount, SendMessageOptions.DontRequireReceiver); ///
+                    Shot.transform.SendMessage("DeductPoints", DamageAmount, SendMessageOptions.DontRequireReceiver);
+                        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit))
+                        {
+                            Instantiate(TheBullet, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+                        }
                 }
             }
         }
